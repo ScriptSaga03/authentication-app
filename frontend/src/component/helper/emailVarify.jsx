@@ -21,11 +21,16 @@ export default function VerifyEmail() {
   }
 
 
-  const openGmailInbox = () => {
-    window.open("https://mail.google.com/mail/u/0/#inbox", "_blank");
+  const openGmailApp = () => {
+    window.location.href = "googlegmail://";
+  
+    setTimeout(() => {
+      if (!document.hidden) {
+        window.open("https://mail.google.com/mail/u/0/#inbox", "_blank");
+      }
+    }, 500); 
   };
-
-  // Fallback if email is missing
+  
   if (!email) {
     return (
       <section className="bg-white dark:bg-[#181a1b] min-h-screen text-gray-900 dark:text-white">
@@ -65,7 +70,7 @@ export default function VerifyEmail() {
           {/* Buttons */}
           <div className="flex flex-col space-y-4">
             <button
-              onClick={openGmailInbox}
+              onClick={openGmailApp}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center space-x-2"
             >
               <Mail className="w-5 h-5" />
