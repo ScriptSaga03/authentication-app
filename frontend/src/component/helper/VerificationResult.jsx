@@ -5,11 +5,14 @@ import {handleResendEmailVerification} from "../services/handleRequest";
 
 export default function VerificationResult() {
   const [searchParams] = useSearchParams();
+  const email = searchParams.get("email");
   const isVerified = searchParams.get("verified") === "true";
 
   const handleSubmit =()=>{
       handleResendEmailVerification(email)
     }
+
+
 
   return (
     <section className="min-h-screen flex items-center justify-center p-6 bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
