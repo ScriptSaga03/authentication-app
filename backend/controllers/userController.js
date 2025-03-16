@@ -214,7 +214,7 @@ const handleEmailVerify = async (req, res) => {
     await UnverifiedUser.deleteOne({ _id: unverifiedUser._id });
 
     // Redirect to frontend success page
-    res.redirect(`${process.env.FRONTEND_URL}/verify?email=${newUser.email}&verified=true`);
+    res.redirect(`${process.env.FRONTEND_URL}/verify?verified=true`);
 
     // console.log(
     //   "Redirecting to:",
