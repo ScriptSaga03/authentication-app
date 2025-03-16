@@ -1,7 +1,7 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { CheckCircle, XCircle } from "lucide-react";
-import { handleResendEmailVerification } from "../../../../backend/controllers/userController";
+import {handleResendEmailVerification} from "../services/handleRequest";
 
 export default function VerificationResult() {
   const [searchParams] = useSearchParams();
