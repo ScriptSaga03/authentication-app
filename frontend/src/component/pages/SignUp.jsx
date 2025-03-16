@@ -49,6 +49,8 @@ export default function SignUp() {
   const handleNavigate = () => {
     handleAuthType();
     setIsSignedUp(true);
+    // After registration or when sending the verification email
+    localStorage.setItem("verificationEmail", email);
     navigate(`/verify-email?email=${encodeURIComponent(user.userEmail)}`);
     // navigate("/verify-email")
   };
