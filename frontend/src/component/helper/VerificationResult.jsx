@@ -1,10 +1,15 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
 import { CheckCircle, XCircle } from "lucide-react";
+import { handleResendEmailVerification } from "../../../../backend/controllers/userController";
 
 export default function VerificationResult() {
   const [searchParams] = useSearchParams();
   const isVerified = searchParams.get("verified") === "true";
+
+  const handleSubmit =()=>{
+      handleResendEmailVerification(email)
+    }
 
   return (
     <section className="min-h-screen flex items-center justify-center p-6 bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
@@ -30,12 +35,12 @@ export default function VerificationResult() {
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               The verification link is invalid or has expired. Please try again.
             </p>
-            <a
-              href="/resend-verification"
+            <button
+             onClick={handleSubmit}
               className="w-full bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-500 transition duration-300 flex items-center justify-center space-x-2"
             >
               <span>Resend Verification Email</span>
-            </a>
+            </button>
             <br />
             <a
               href="/signin"

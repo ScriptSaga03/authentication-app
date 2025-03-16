@@ -32,13 +32,13 @@ router.post("/register",
 
 // email varification
 router.get("/verify-email/:token",
-    // verifyEmailLimiter,
+    verifyEmailLimiter,
      routes.handleEmailVerify);
 
 
 // resend email verification
 router.post("/resend-verification", 
-  // resendVerifyEmailLimiter,
+  resendVerifyEmailLimiter,
     routes.handleResendVerificationEmail);
 
 

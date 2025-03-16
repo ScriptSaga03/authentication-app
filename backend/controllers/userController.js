@@ -216,10 +216,10 @@ const handleEmailVerify = async (req, res) => {
     // Redirect to frontend success page
     res.redirect(`${process.env.FRONTEND_URL}/verify?verified=true`);
 
-    console.log(
-      "Redirecting to:",
-      `${process.env.FRONTEND_URL}/verify?verified=true}`
-    );
+    // console.log(
+    //   "Redirecting to:",
+    //   `${process.env.FRONTEND_URL}/verify?verified=true}`
+    // );
 
     // res.send(`
     //         <h1>Email Verified Successfully! 🎉</h1>
