@@ -214,12 +214,12 @@ const handleEmailVerify = async (req, res) => {
     await UnverifiedUser.deleteOne({ _id: unverifiedUser._id });
 
     // Redirect to frontend success page
-    res.redirect(`${process.env.FRONTEND_URL}/verify?verified=true`);
+    res.redirect(`${process.env.FRONTEND_URL}/verify?email=${newUser.email}&verified=true`);
 
-    console.log(
-      "Redirecting to:",
-      `${process.env.FRONTEND_URL}/verify?verified=true}`
-    );
+    // console.log(
+    //   "Redirecting to:",
+    //   `${process.env.FRONTEND_URL}/verify?verified=true}`
+    // );
 
     // res.send(`
     //         <h1>Email Verified Successfully! 🎉</h1>
@@ -227,7 +227,7 @@ const handleEmailVerify = async (req, res) => {
     //       `);
   } catch (error) {
     console.error("Verification failed:", error);
-    res.redirect(`${process.env.FRONTEND_URL}/verify?verified=false`);
+    res.redirect(`${process.env.FRONTEND_URL}/verify?email=${user.email}&verified=false`);
   }
 };
 
@@ -290,38 +290,43 @@ const handleLogin = async (req, res) => {
 const handleResendVerificationEmail = async (req, res) => {
   const { email } = req.body;
   try {
-    const user = await UnverifiedUser.findOne({ email });
-    if (!user) {
-      return res.status(404).json({
-        success: false,
-        message: "📧 Email not registered. Please sign up first.",
+    // Step 1: Check in UnverifiedUser collection
+    const unverifiedUser = await UnverifiedUser.findOne({ email });
+    if (unverifiedUser) {
+      // If user is found in UnverifiedUser collection, they are not yet verified
+      // Generate new token and update the user
+      unverifiedUser.verificationToken = crypto.randomBytes(32).toString("hex");
+      unverifiedUser.verificationExpires = Date.now() + 3600000; // 1 hour
+      await unverifiedUser.save();
+
+      // Send verification email
+      const link = `https://authentication-app-9ywt.onrender.com/auth/users/verify-email/${unverifiedUser.verificationToken}`;
+      await sendVerificationEmail(unverifiedUser.email, link);
+
+      return res.status(200).json({
+        success: true,
+        message: "📬 New verification email sent! Check your inbox (including spam).",
       });
     }
 
-    // Check if already verified
-    if (user.isVerified) {
+    // Step 2: Check in User collection if not found in UnverifiedUser
+    const verifiedUser = await User.findOne({ email });
+    if (verifiedUser) {
+      // If user is found in User collection, they are already verified
       return res.status(400).json({
         success: false,
         message: "✅ Email already verified. You can login now.",
       });
     }
 
-    // Generate new token with user ID
-    user.verificationToken = crypto.randomBytes(32).toString("hex");
-    user.verificationExpires = Date.now() + 3600000;
-    await user.save();
-
-
-    // Send email
-    const link = `https://authentication-app-9ywt.onrender.com/auth/users/verify-email/${user.verificationToken}`;
-    await sendVerificationEmail(user.email, link);
-
-    res.status(200).json({
-      success: true,
-      message:
-        "📬 New verification email sent! Check your inbox (including spam).",
+    // Step 3: User not found in either collection
+    console.log(`User with email ${email} not found in UnverifiedUser or User collections.`);
+    return res.status(404).json({
+      success: false,
+      message: "📧 Email not registered. Please sign up first.",
     });
   } catch (error) {
+    console.error("Error in handleResendVerificationEmail:", error);
     res.status(500).json({
       success: false,
       message: "😟 Failed to resend email. Please try again later.",
