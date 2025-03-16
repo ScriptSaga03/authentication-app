@@ -168,7 +168,7 @@ const handleRegister = async (req, res) => {
     await newUnverifiedUser.save();
 
     // Send verification email
-    const verificationLink = `${process.env.BACKEND_URL}/auth/users/verify-email/${newUnverifiedUser.verificationToken}`;
+    const verificationLink = `https://authentication-app-9ywt.onrender.com/auth/users/verify-email/${newUnverifiedUser.verificationToken}`;
     await sendVerificationEmail(newUnverifiedUser.email, verificationLink);
     // console.log("verification Link", verificationLink);
     res.status(201).json({
@@ -313,7 +313,7 @@ const handleResendVerificationEmail = async (req, res) => {
 
 
     // Send email
-    const link = `${process.env.BACKEND_URL}/auth/users/verify-email/${user.verificationToken}`;
+    const link = `https://authentication-app-9ywt.onrender.com/auth/users/verify-email/${user.verificationToken}`;
     await sendVerificationEmail(user.email, link);
 
     res.status(200).json({
