@@ -313,7 +313,7 @@ const handleResendVerificationEmail = async (req, res) => {
 
 
     // Send email
-    const link = `https://authentication-app-9ywt.onrender.com/auth/users/verify-email/${user.verificationToken}`;
+    const link = `${process.env.FRONTEND_URL}/auth/users/verify-email/${user.verificationToken}`;
     await sendVerificationEmail(user.email, link);
 
     res.status(200).json({
