@@ -227,7 +227,7 @@ const handleEmailVerify = async (req, res) => {
     //       `);
   } catch (error) {
     console.error("Verification failed:", error);
-    res.redirect(`${process.env.FRONTEND_URL}/verify?email=${user.email}&verified=false`);
+    res.redirect(`${process.env.FRONTEND_URL}/verify?verified=false`);
   }
 };
 
