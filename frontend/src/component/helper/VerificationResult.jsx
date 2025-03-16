@@ -8,9 +8,19 @@ export default function VerificationResult() {
   const email = searchParams.get("email");
   const isVerified = searchParams.get("verified") === "true";
 
-  const handleSubmit =()=>{
+  const handleSubmit = () => {
+    if (email) {
       handleResendEmailVerification(email)
+        .then(() => {
+          console.log("Verification email resent successfully"); // Debugging
+        })
+        .catch((error) => {
+          console.error("Failed to resend verification email:", error); // Debugging
+        });
+    } else {
+      console.error("Email is missing"); // Debugging
     }
+  };
 
 
 
