@@ -8,7 +8,7 @@ export default function VerificationResult() {
 
   const isVerified = searchParams.get("verified") === "true";
 
-  const navigate = useNavigate
+  const navigate = useNavigate();
 
   return (
     <section className="min-h-screen flex items-center justify-center p-6 bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
