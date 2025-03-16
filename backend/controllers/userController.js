@@ -216,10 +216,10 @@ const handleEmailVerify = async (req, res) => {
     // Redirect to frontend success page
     res.redirect(`${process.env.FRONTEND_URL}/verify?verified=true`);
 
-    // console.log(
-    //   "Redirecting to:",
-    //   `${process.env.FRONTEND_URL}/verify?verified=true}`
-    // );
+    console.log(
+      "Redirecting to:",
+      `${process.env.FRONTEND_URL}/verify?verified=true}`
+    );
 
     // res.send(`
     //         <h1>Email Verified Successfully! 🎉</h1>
@@ -313,7 +313,7 @@ const handleResendVerificationEmail = async (req, res) => {
 
 
     // Send email
-    const link = `${process.env.FRONTEND_URL}/auth/users/verify-email/${user.verificationToken}`;
+    const link = `https://authentication-app-9ywt.onrender.com/auth/users/verify-email/${user.verificationToken}`;
     await sendVerificationEmail(user.email, link);
 
     res.status(200).json({
