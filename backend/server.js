@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-  origin: [process.env.FRONTEND_URL], 
+  origin: "https://authentication-app-9ywt.onrender.com", 
   credentials: true
 }));
 

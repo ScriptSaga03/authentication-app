@@ -18,7 +18,7 @@ export const handleSubmit = async (e, user, setUser, handleNavigate) => {
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/auth/users/register",
+      "https://authentication-app-9ywt.onrender.com/auth/users/register",
       payload
     );
 
@@ -62,7 +62,7 @@ export const handleLogin = async (e, isLogin,setIsLogin, navigate) => {
 
   try {
     const response = await axios.post(
-      "http://localhost:5000/auth/users/login",
+      "https://authentication-app-9ywt.onrender.com/auth/users/login",
       payload
     );
 
@@ -106,7 +106,7 @@ export const handleLogin = async (e, isLogin,setIsLogin, navigate) => {
 export const handleForgetPassword = async (email) => {
   try {
     const response = await axios.post(
-      "http://localhost:5000/auth/users/forget-password",
+      "https://authentication-app-9ywt.onrender.com/auth/users/forget-password",
       { email }
     );
     const { success, message } = response.data;
@@ -138,7 +138,7 @@ export const handleResetPassword = async (
 ) => {
   try {
     const response = await axios.post(
-      `http://localhost:5000/auth/users/reset-password/${token}`,
+      `https://authentication-app-9ywt.onrender.com/auth/users/reset-password/${token}`,
       {
         newPassword,
         confirmPassword,
@@ -171,7 +171,7 @@ export const handleResetPassword = async (
  export const handleResendEmailVerification = async (email) => {
 
   try {
-    const response = await axios.post("http://localhost:5000/auth/users/resend-verification", { email });
+    const response = await axios.post("https://authentication-app-9ywt.onrender.com/auth/users/resend-verification", { email });
     const { success, message } = response.data;
 
     if (success) {
