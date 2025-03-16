@@ -7,6 +7,7 @@ export default function VerificationResult() {
   const [searchParams] = useSearchParams();
 
   const isVerified = searchParams.get("verified") === "true";
+  const email = localStorage.getItem("verificationEmail");
 
   const navigate = useNavigate();
 
@@ -36,7 +37,7 @@ export default function VerificationResult() {
             </p>
             <br />
             <button
-              onClick={() => navigate(`/verify-email?email=${email}`)}
+              onClick={() => navigate("/verify-email")} 
               className="mt-4 w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-400 transition duration-300 flex items-center justify-center space-x-2"
             >
               <span>Go Back</span>

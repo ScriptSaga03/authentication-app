@@ -7,12 +7,9 @@ import { handleResendEmailVerification } from "../services/handleRequest";
 
 export default function VerifyEmail() {
   const [searchParams] = useSearchParams();
-  const email = searchParams.get("email");
+  let email = searchParams.get("email");
 
-  // Debugging: Log the email
-  // console.log("Email from query params:", email);
-  
-
+  email = localStorage.getItem("verification");
   // Show toast notification if email is present
   useEffect(() => {
     if (email) {
