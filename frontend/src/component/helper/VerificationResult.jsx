@@ -34,12 +34,6 @@ export default function VerificationResult() {
             <p className="text-gray-600 dark:text-gray-400 mb-6">
               The verification link is invalid or has expired. Please try again.
             </p>
-            <button
-             onClick={handleSubmit}
-              className="w-full bg-gray-600 text-white px-6 py-3 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-500 transition duration-300 flex items-center justify-center space-x-2"
-            >
-              <span>Resend Verification Email</span>
-            </button>
             <br />
             <button
               onClick={()=>navigate("/verify-email")}
