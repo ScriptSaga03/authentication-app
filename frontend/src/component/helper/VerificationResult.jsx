@@ -1,28 +1,14 @@
 import React from "react";
-import { useSearchParams } from "react-router-dom";
+import {  useNavigate, useSearchParams } from "react-router-dom";
 import { CheckCircle, XCircle } from "lucide-react";
-import {handleResendEmailVerification} from "../services/handleRequest";
+
 
 export default function VerificationResult() {
   const [searchParams] = useSearchParams();
-  const email = searchParams.get("email");
+
   const isVerified = searchParams.get("verified") === "true";
 
-  const handleSubmit = () => {
-    if (email) {
-      handleResendEmailVerification(email)
-        .then(() => {
-          console.log("Verification email resent successfully"); // Debugging
-        })
-        .catch((error) => {
-          console.error("Failed to resend verification email:", error); // Debugging
-        });
-    } else {
-      console.error("Email is missing"); // Debugging
-    }
-  };
-
-
+  const navigate = useNavigate
 
   return (
     <section className="min-h-screen flex items-center justify-center p-6 bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white">
@@ -55,12 +41,12 @@ export default function VerificationResult() {
               <span>Resend Verification Email</span>
             </button>
             <br />
-            <a
-              href="/signin"
+            <button
+              onClick={()=>navigate("/verify-email")}
               className="mt-4 w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-400 transition duration-300 flex items-center justify-center space-x-2"
             >
-              <span>Go to Login</span>
-            </a>
+              <span>Go Back</span>
+            </button>
           </>
         )}
       </div>
