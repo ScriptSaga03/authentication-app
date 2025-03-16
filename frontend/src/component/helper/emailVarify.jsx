@@ -20,6 +20,11 @@ export default function VerifyEmail() {
     handleResendEmailVerification(email)
   }
 
+
+  const openGmailInbox = () => {
+    window.open("https://mail.google.com/mail/u/0/#inbox", "_blank");
+  };
+
   // Fallback if email is missing
   if (!email) {
     return (
@@ -59,13 +64,13 @@ export default function VerifyEmail() {
 
           {/* Buttons */}
           <div className="flex flex-col space-y-4">
-            <a
-              href={`mailto:${email}`} 
+            <button
+              onClick={openGmailInbox}
               className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center space-x-2"
             >
               <Mail className="w-5 h-5" />
               <span>Open Email</span>
-            </a>
+            </button>
 
             <button
               onClick={handleSubmit}

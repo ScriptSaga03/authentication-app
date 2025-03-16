@@ -50,7 +50,7 @@ export default function SignUp() {
     handleAuthType();
     setIsSignedUp(true);
     // After registration or when sending the verification email
-    localStorage.setItem("verificationEmail", user.userEmail);
+    // localStorage.setItem("verificationEmail", user.userEmail);
     navigate(`/verify-email?email=${encodeURIComponent(user.userEmail)}`);
     // navigate("/verify-email")
   };
